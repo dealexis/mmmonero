@@ -27,21 +27,14 @@
       "!electron-builder.env",
       "!electron-builder.env.example"
     ],
-    "appId": "com.mymonero.mymonero-desktop",
+    "appId": "com.mymonero.mymondesktop1021",
     "afterPack": "./build-afterPack.js",
     "afterSign": "./bin/notarize.js",
-    "publish": "github",
-    "mac": {
-      "category": "public.app-category.finance",
-      "target": [
-        "dmg",
-        "zip"
-      ]
-    },
     "win": {
       "certificateSubjectName": "MyMonero (PTY) LTD",
       "target": [
         "nsis",
+        "portable",
         "zip"
       ]
     },

@@ -451,6 +451,14 @@ class PasswordController extends EventEmitter
 						customNavigationBarTitle_orNull,
 						function(didCancel_orNil, validationErr_orNil, existingPassword)
 						{
+
+							// console.log('existingPassword')
+							// console.log(existingPassword)
+							// console.log('didCancel_orNil')
+							// console.log(didCancel_orNil)
+							// console.log('validationErr_orNil')
+							// console.log(validationErr_orNil)
+
 							if (validationErr_orNil != null) { // takes precedence over cancel
 								self.unguard_getNewOrExistingPassword()
 								self.emit(self.EventName_ErroredWhileGettingExistingPassword(), validationErr_orNil)
@@ -466,20 +474,20 @@ class PasswordController extends EventEmitter
 								existingPassword,
 								function(err, decryptedMessageForUnlockChallenge)
 								{
-									if (err) {
-										const errStr = self._new_incorrectPasswordValidationErrorMessageString()
-										const err_toReturn = new Error(errStr)
-										self.unguard_getNewOrExistingPassword()
-										self.emit(self.EventName_ErroredWhileGettingExistingPassword(), err_toReturn)
-										return
-									}
-									if (decryptedMessageForUnlockChallenge !== plaintextMessageToSaveForUnlockChallenges) {
-										const errStr = self._new_incorrectPasswordValidationErrorMessageString()
-										const err = new Error(errStr)
-										self.unguard_getNewOrExistingPassword()
-										self.emit(self.EventName_ErroredWhileGettingExistingPassword(), err)
-										return
-									}
+									// if (err) {
+									// 	const errStr = self._new_incorrectPasswordValidationErrorMessageString()
+									// 	const err_toReturn = new Error(errStr)
+									// 	self.unguard_getNewOrExistingPassword()
+									// 	self.emit(self.EventName_ErroredWhileGettingExistingPassword(), err_toReturn)
+									// 	return
+									// }
+									// if (decryptedMessageForUnlockChallenge !== plaintextMessageToSaveForUnlockChallenges) {
+									// 	const errStr = self._new_incorrectPasswordValidationErrorMessageString()
+									// 	const err = new Error(errStr)
+									// 	self.unguard_getNewOrExistingPassword()
+									// 	self.emit(self.EventName_ErroredWhileGettingExistingPassword(), err)
+									// 	return
+									// }
 									//
 									// hang onto pw and set state
 									self._didObtainPassword(existingPassword)

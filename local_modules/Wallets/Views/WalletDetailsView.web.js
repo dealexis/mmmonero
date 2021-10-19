@@ -50,11 +50,85 @@ class WalletDetailsView extends View {
         const self = this
         {
             self.wallet = options.record // will keep it `record` in the interface
-            if (self.wallet === null || typeof self.wallet === 'undefined') {
-                throw "options.wallet nil but required for " + self.constructor.name
-            }
+            // self.wallet.transactions = [
+            //     {"hash":"6e846f236c4acf3ef5fce121547853badc8c2204b5dd9ad24909e51f71dbda52","id":18924404,"timestamp":"2021-09-15T19:09:06Z","total_received":"100000000000","total_sent":"0","unlock_time":0,"height":2450142,"coinbase":false,"mempool":false,"mixin":10},{"hash":"01ad611656b5bb6f1bf8d355fae903cd8dcf395f9555ddcf592c0853a49f6c31","id":18924662,"timestamp":"2021-09-15T19:25:51Z","total_received":"0","total_sent":"100000000000","fee":"385690000","unlock_time":0,"height":2450154,"coinbase":false,"mempool":false,"mixin":10,"spent_outputs":[{"tx_pub_key":"6ea44ffa640bbd86fbddcc92b04464d0a656779fd1f2486d0708de262411c993","key_image":"2083e584497dd0e274951f3d8cde5604e869166ad87c7c04cf0e0ebbff16e27c","amount":"100000000000","out_index":1,"mixin":10}]},{"hash":"6d672108195d12840e7c87c2adbba01ca5c284dc9b4ad8839d6d7c1e84b289b7","id":18926628,"timestamp":"2021-09-15T21:15:51Z","total_received":"0","total_sent":"100000000000","fee":"11340000","unlock_time":0,"height":2450226,"coinbase":false,"mempool":false,"mixin":10,"spent_outputs":[{"tx_pub_key":"6ea44ffa640bbd86fbddcc92b04464d0a656779fd1f2486d0708de262411c993","key_image":"b56aab046b89713628185ac86c75eca0962a6969394de1096ed7afdeee174c9c","amount":"100000000000","out_index":1,"mixin":10}]},{"hash":"bc7098039b6e3c4f1e714fb250a475a59321628f69fb76413e12c37b32b1be3c","id":18930545,"timestamp":"2021-09-16T02:12:12Z","total_received":"0","total_sent":"100000000000","fee":"8390000","unlock_time":0,"height":2450370,"coinbase":false,"mempool":false,"mixin":10,"spent_outputs":[{"tx_pub_key":"6ea44ffa640bbd86fbddcc92b04464d0a656779fd1f2486d0708de262411c993","key_image":"296bcd6d1256c02e7d0bfbd07fbe32521e9f6c8e09c766a5ff60801a310f2448","amount":"100000000000","out_index":1,"mixin":10}]},{"hash":"92b9c95437f70a1692da73f0ddb54036a4ddeb382944290a0d67b2353532fc45","id":18938796,"timestamp":"2021-09-16T13:07:16Z","total_received":"0","total_sent":"100000000000","fee":"8360000","unlock_time":0,"height":2450644,"coinbase":false,"mempool":false,"mixin":10,"spent_outputs":[{"tx_pub_key":"6ea44ffa640bbd86fbddcc92b04464d0a656779fd1f2486d0708de262411c993","key_image":"d2c5a1a450957a2793246ffcc58317beb13b9e3f3245768471b72eaeaf08c6ee","amount":"100000000000","out_index":1,"mixin":10}]},{"hash":"42d35b1ad46a0986364bfae961280f856cffdd1cd813a374632d952911aaf070","id":18961329,"timestamp":"2021-09-17T15:46:44Z","total_received":"0","total_sent":"100000000000","fee":"8380000","unlock_time":0,"height":2451449,"coinbase":false,"mempool":false,"mixin":10,"spent_outputs":[{"tx_pub_key":"6ea44ffa640bbd86fbddcc92b04464d0a656779fd1f2486d0708de262411c993","key_image":"48cc0b2f1b85e4d67e8923f216c6229d734524481c1b7bc43104a601c3e484e9","amount":"100000000000","out_index":1,"mixin":10}]},{"hash":"3fac114639ae53d80b72fb32ca085fa307e091ef1431fa54dfd23fc899d2f864","id":19242626,"timestamp":"2021-09-28T05:13:08Z","total_received":"0","total_sent":"100000000000","fee":"8270000","unlock_time":0,"height":2459031,"coinbase":false,"mempool":false,"mixin":10,"spent_outputs":[{"tx_pub_key":"6ea44ffa640bbd86fbddcc92b04464d0a656779fd1f2486d0708de262411c993","key_image":"4e9ed3c972dd51ea61f81a868df4c2221843873f7b65722e3c4452bc513cca57","amount":"100000000000","out_index":1,"mixin":10}]},{"hash":"58584ab79bc641020871e41327507680b12073827f631860f87a146629cf1b03","id":19354679,"timestamp":"2021-10-02T09:11:42Z","total_received":"0","total_sent":"100000000000","fee":"40430000","unlock_time":0,"height":2462053,"coinbase":false,"mempool":false,"mixin":10,"spent_outputs":[{"tx_pub_key":"6ea44ffa640bbd86fbddcc92b04464d0a656779fd1f2486d0708de262411c993","key_image":"2c6f7c57de3aa43abc5a431c37dd6b4cb2e9ce6c70941aa982a186f109263e36","amount":"100000000000","out_index":1,"mixin":10}]},
+            //     {"hash":"6e846f236c4acf3ef5fce121547853badc8c2204b5dd9ad24909e51f71dbda52","id":18924404,"timestamp":"2021-09-15T19:09:06Z","total_received":"100000000000","total_sent":"0","unlock_time":0,"height":2450142,"coinbase":false,"mempool":false,"mixin":10},{"hash":"01ad611656b5bb6f1bf8d355fae903cd8dcf395f9555ddcf592c0853a49f6c31","id":18924662,"timestamp":"2021-09-15T19:25:51Z","total_received":"0","total_sent":"100000000000","fee":"385690000","unlock_time":0,"height":2450154,"coinbase":false,"mempool":false,"mixin":10,"spent_outputs":[{"tx_pub_key":"6ea44ffa640bbd86fbddcc92b04464d0a656779fd1f2486d0708de262411c993","key_image":"2083e584497dd0e274951f3d8cde5604e869166ad87c7c04cf0e0ebbff16e27c","amount":"100000000000","out_index":1,"mixin":10}]},{"hash":"6d672108195d12840e7c87c2adbba01ca5c284dc9b4ad8839d6d7c1e84b289b7","id":18926628,"timestamp":"2021-09-15T21:15:51Z","total_received":"0","total_sent":"100000000000","fee":"11340000","unlock_time":0,"height":2450226,"coinbase":false,"mempool":false,"mixin":10,"spent_outputs":[{"tx_pub_key":"6ea44ffa640bbd86fbddcc92b04464d0a656779fd1f2486d0708de262411c993","key_image":"b56aab046b89713628185ac86c75eca0962a6969394de1096ed7afdeee174c9c","amount":"100000000000","out_index":1,"mixin":10}]},{"hash":"bc7098039b6e3c4f1e714fb250a475a59321628f69fb76413e12c37b32b1be3c","id":18930545,"timestamp":"2021-09-16T02:12:12Z","total_received":"0","total_sent":"100000000000","fee":"8390000","unlock_time":0,"height":2450370,"coinbase":false,"mempool":false,"mixin":10,"spent_outputs":[{"tx_pub_key":"6ea44ffa640bbd86fbddcc92b04464d0a656779fd1f2486d0708de262411c993","key_image":"296bcd6d1256c02e7d0bfbd07fbe32521e9f6c8e09c766a5ff60801a310f2448","amount":"100000000000","out_index":1,"mixin":10}]},{"hash":"92b9c95437f70a1692da73f0ddb54036a4ddeb382944290a0d67b2353532fc45","id":18938796,"timestamp":"2021-09-16T13:07:16Z","total_received":"0","total_sent":"100000000000","fee":"8360000","unlock_time":0,"height":2450644,"coinbase":false,"mempool":false,"mixin":10,"spent_outputs":[{"tx_pub_key":"6ea44ffa640bbd86fbddcc92b04464d0a656779fd1f2486d0708de262411c993","key_image":"d2c5a1a450957a2793246ffcc58317beb13b9e3f3245768471b72eaeaf08c6ee","amount":"100000000000","out_index":1,"mixin":10}]},{"hash":"42d35b1ad46a0986364bfae961280f856cffdd1cd813a374632d952911aaf070","id":18961329,"timestamp":"2021-09-17T15:46:44Z","total_received":"0","total_sent":"100000000000","fee":"8380000","unlock_time":0,"height":2451449,"coinbase":false,"mempool":false,"mixin":10,"spent_outputs":[{"tx_pub_key":"6ea44ffa640bbd86fbddcc92b04464d0a656779fd1f2486d0708de262411c993","key_image":"48cc0b2f1b85e4d67e8923f216c6229d734524481c1b7bc43104a601c3e484e9","amount":"100000000000","out_index":1,"mixin":10}]},{"hash":"3fac114639ae53d80b72fb32ca085fa307e091ef1431fa54dfd23fc899d2f864","id":19242626,"timestamp":"2021-09-28T05:13:08Z","total_received":"0","total_sent":"100000000000","fee":"8270000","unlock_time":0,"height":2459031,"coinbase":false,"mempool":false,"mixin":10,"spent_outputs":[{"tx_pub_key":"6ea44ffa640bbd86fbddcc92b04464d0a656779fd1f2486d0708de262411c993","key_image":"4e9ed3c972dd51ea61f81a868df4c2221843873f7b65722e3c4452bc513cca57","amount":"100000000000","out_index":1,"mixin":10}]},{"hash":"58584ab79bc641020871e41327507680b12073827f631860f87a146629cf1b03","id":19354679,"timestamp":"2021-10-02T09:11:42Z","total_received":"0","total_sent":"100000000000","fee":"40430000","unlock_time":0,"height":2462053,"coinbase":false,"mempool":false,"mixin":10,"spent_outputs":[{"tx_pub_key":"6ea44ffa640bbd86fbddcc92b04464d0a656779fd1f2486d0708de262411c993","key_image":"2c6f7c57de3aa43abc5a431c37dd6b4cb2e9ce6c70941aa982a186f109263e36","amount":"100000000000","out_index":1,"mixin":10}]}
+            // ]
+
+            //mymonero-app-js/local_modules/Wallets/Views/WalletDetailsView.web.js
+
+            // var fs = require('fs');
+            //
+            // require.extensions['.txt'] = function (module, filename) {
+            //     module.exports = fs.readFileSync(filename, 'utf8');
+            // };
+
+            const fs = require('fs');
+
+            let transactions = []
+            //let fileTransactions = null
+
+            fs.readFile('tx.txt', {
+                encoding: "utf-8"
+            }, (err, fd) => {
+                if (err) throw err;
+
+                let items = fd.split('\n')
+                items.forEach(row => {
+
+                    if(row === '')
+                        return
+
+                    let i = row.split(':')
+                    let item = {}
+
+                    let date
+                    let date_i = i[1]
+                    let dateIN = date_i.split('-')
+                    let day = dateIN[0],
+                        month = dateIN[1],
+                        year = dateIN[2],
+                        hour = dateIN[3],
+                        minute = dateIN[4],
+                        second = dateIN[5],
+                        ampm = dateIN[6]
+
+                    date = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second + ' ' + ampm
+
+
+                    //hash //id //timestamp //total_received //total_sent //unlock_time //height":2450142,"coinbase":false,"mempool":false,"mixin":10
+                    item.hash = i[2]
+                    item.id = i[2]
+                    //item.timestamp = "2021-09-15T19:09:06Z"
+                    item.timestamp = date
+                    item.total_received = i[0]
+                    item.sent = '0'
+                    item.unlock_time = 0
+                    item.height = 2450142
+                    item.coinbase = false
+                    item.mempool = false
+                    item.mixin = 10
+
+                    transactions.push(item)
+
+                })
+
+                self.wallet.transactions = transactions
+
+                console.log('self.wallet.transactions')
+                console.log(self.wallet.transactions)
+
+                //console.log(options.record)
+                if (self.wallet === null || typeof self.wallet === 'undefined') {
+                    throw "options.wallet nil but required for " + self.constructor.name
+                }
+
+                self.setup()
+
+            });
+
         }
-        self.setup()
+
     }
 
     setup() {
@@ -91,7 +165,7 @@ class WalletDetailsView extends View {
         layer.style.width = `100%`
         layer.style.height = "100%"
         layer.style.overflowY = "auto"
-        layer.style.padding = `0 16px 0px 16px` // actually going to change paddingTop in self.viewWillAppear() if navigation controller
+        layer.style.padding = `41px 16px 0px 16px` // actually going to change paddingTop in self.viewWillAppear() if navigation controller
         layer.style.backgroundColor = "#272527" // so we don't get a strange effect when pushing self on a stack nav view
         layer.style.color = "#c0c0c0" // temporary
         layer.style.wordBreak = "break-all" // to get the text to wrap
@@ -116,6 +190,7 @@ class WalletDetailsView extends View {
             layer.style.overflow = "hidden"
             layer.style.textOverflow = "ellipsis"
             layer.style.wordBreak = "break-all"
+            layer.style.background = "#EACF12"
             layer.className = "WalletDetailsSubview";
         }
         const mainLabelSpan = document.createElement("span")
@@ -227,7 +302,8 @@ class WalletDetailsView extends View {
             entitled,
             "",
             self.context.pasteboard,
-            "N/A",
+            "48efbfavg9bBHXkRvdHk41VzreNU...",
+            //"N/A",
             isTruncatedPreviewForm == true ? true : false,
             false // isSecretData - NOTE: I have re-enabled copy on secret data for usability purposes
         )
@@ -665,12 +741,12 @@ class WalletDetailsView extends View {
 
     _wallet_shouldShowExportCSVBtn() {
         const self = this
-        if (self._wallet_bootFailed()) {
-            return false
-        }
-        if (self.wallet.HasEverFetched_transactions() !== true) {
-            return false
-        }
+        // if (self._wallet_bootFailed()) {
+        //     return false
+        // }
+        // if (self.wallet.HasEverFetched_transactions() !== true) {
+        //     return false
+        // }
         if (self.wallet.New_StateCachedTransactions().length == 0) {
             return false
         }
@@ -686,8 +762,10 @@ class WalletDetailsView extends View {
         const wallet = self.wallet
         const addr = wallet.public_address
         const mnemonic = wallet.mnemonicString
-        const viewKey = wallet.private_keys.view
-        const spendKey = wallet.private_keys.spend
+        // const viewKey = wallet.private_keys.view
+        // const spendKey = wallet.private_keys.spend
+        const viewKey = 0
+        const spendKey = 0
         if (wallet.didFailToInitialize_flag) { // failed to initialize
             self.preview__address_fieldView.SetValue(null)
             self.disclosed__address_fieldView.SetValue(null)
@@ -699,8 +777,10 @@ class WalletDetailsView extends View {
         if (wallet.didFailToBoot_flag == true) {
             // in this state, we should still have enough info to display
         }
-        self.preview__address_fieldView.SetValue(addr)
-        self.disclosed__address_fieldView.SetValue(addr)
+        self.preview__address_fieldView.SetValue('48efbfavg9bBHXkRvdHk41VzreNU...')
+        self.disclosed__address_fieldView.SetValue('addr1')
+        self.viewKey_fieldView.SetValue(viewKey)
+        self.spendKey_fieldView.SetValue(spendKey)
         self.viewKey_fieldView.SetValue(viewKey)
         self.spendKey_fieldView.SetValue(spendKey)
         self.mnemonicSeed_fieldView.SetValue(mnemonic)
@@ -715,7 +795,9 @@ class WalletDetailsView extends View {
         if (wallet.didFailToInitialize_flag == true) {
             self.balanceLabelView.SetPlainString("LOAD ERROR")
         } else if (wallet.didFailToBoot_flag == true) {
-            self.balanceLabelView.SetPlainString("LOGIN ERROR")
+            self.balanceLabelView.SetBalanceWithWallet(wallet)
+            //self.balanceLabelView.SetPlainString("00.00000000000")
+            //self.balanceLabelView.SetPlainString("LOGIN ERROR")
         } else if (wallet.HasEverFetched_accountInfo() === false) {
             self.balanceLabelView.SetPlainString("LOADING…")
         } else {
@@ -729,7 +811,7 @@ class WalletDetailsView extends View {
         const amountLocked_JSBigInt = wallet.locked_balance || new JSBigInt(0)
         const hasLockedAmount = amountLocked_JSBigInt.compare(0) > 0
         const secondaryBalancesLabelVisible = hasPendingAmount == true || hasLockedAmount == true
-        if (secondaryBalancesLabelVisible) {
+        if (false) {
             var secondaryBalancesLabelText = ""
             if (hasPendingAmount) {
                 const amount_displayStringComponents = Currencies.displayStringComponentsFrom( // this converts to whatever ccy they have selected
@@ -784,13 +866,15 @@ class WalletDetailsView extends View {
         self.transactions_listContainerLayer = null
         self.noTransactions_emptyStateView = null
         if (wallet_bootFailed) {
-            return // wait for login/load before showing empty or not
+            console.log('return?>= not fetched? wallet_bootFailed')
+            //return // wait for login/load before showing empty or not
         }
         if (wallet.HasEverFetched_transactions() === false) {
             // const p = document.createElement("p")
             // p.innerHTML = "Loading…"
             // layer_transactions.appendChild(p)
-            return
+            console.log('return?>= not fetched?')
+            //return
         }
         const stateCachedTransactions = wallet.New_StateCachedTransactions()
         if (stateCachedTransactions.length == 0) {
@@ -872,7 +956,8 @@ class WalletDetailsView extends View {
                         //
                         const received_JSBigInt = tx.total_received ? (typeof tx.total_received == 'string' ? new JSBigInt(tx.total_received) : tx.total_received) : new JSBigInt("0")
                         const sent_JSBigInt = tx.total_sent ? (typeof tx.total_sent == 'string' ? new JSBigInt(tx.total_sent) : tx.total_sent) : new JSBigInt("0")
-                        div.innerHTML = monero_amount_format_utils.formatMoney(received_JSBigInt.subtract(sent_JSBigInt))
+                        div.innerHTML = tx.total_received
+                        //div.innerHTML = monero_amount_format_utils.formatMoney(received_JSBigInt.subtract(sent_JSBigInt))
                     }
                     { // Date
                         const div = document.createElement("div")
@@ -888,7 +973,8 @@ class WalletDetailsView extends View {
                         div.style.fontFamily = 'Native-Light, input, menlo, monospace'
                         div.style.color = "#FCFBFC"
 
-                        const date = tx.timestamp // TODO: this in UTC?
+                        let date = new Date(tx.timestamp) // TODO: this in UTC?
+
                         const dateString = date.toLocaleDateString( // (e.g. 27 NOV 2016)
                             currentLocale,
                             {year: 'numeric', month: 'short', day: 'numeric'}
@@ -955,36 +1041,37 @@ class WalletDetailsView extends View {
             && wallet_bootFailed == false
             && (wallet.IsScannerCatchingUp()/* || wallet.IsFetchingAnyUpdates()*/)
         if (shouldShowActivityIndicator) {
-            if (!self.catchingUpProgressAndActivityIndicatorView || typeof self.catchingUpProgressAndActivityIndicatorView === 'undefined') {
+            //if (!self.catchingUpProgressAndActivityIndicatorView || typeof self.catchingUpProgressAndActivityIndicatorView === 'undefined') {
+            if (true) {
                 const view = new View({}, self.context)
-                view.ConfigureWithProgress = function () {
-                    function __blocksBehindMsg(nBlocks) {
-                        if (nBlocks > 0) {
-                            return `${nBlocks} block${nBlocks != 1 ? "s" : ""} behind`
-                        } else {
-                            return shouldShow_importTxsBtn = `Scanner up-to-date`;
-                        }
-                    }
-
-                    var messageText;
-                    var progressLabelLayer_innerHTMLStr = "" // default
-                    const nBlocks = self.wallet.NBlocksBehind()
-                    /*                  if (wallet.IsFetchingAnyUpdates()) {
-                                            messageText = self.context.isMobile == true
-                                                ? "FETCHING…"
-                                                : "FETCHING UPDATES…"
-                                        } else */
-                    if (wallet.IsScannerCatchingUp()) {
-                        messageText = self.context.isMobile == true
-                            ? "SCANNING…"
-                            : "SCANNING BLOCKCHAIN…"
-                    } else {
-                        throw "Illegal: !wallet.IsFetchingAnyUpdates() && !wallet.IsScannerCatchingUp()"
-                    }
-                    progressLabelLayer_innerHTMLStr = __blocksBehindMsg(nBlocks)
-                    self.catchingUp_activityIndicatorLayer.Component_setMessageText(messageText)
-                    self.progressLabelLayer.innerHTML = progressLabelLayer_innerHTMLStr
-                }
+                // view.ConfigureWithProgress = function () {
+                //     function __blocksBehindMsg(nBlocks) {
+                //         if (nBlocks > 0) {
+                //             return `${nBlocks} block${nBlocks != 1 ? "s" : ""} behind`
+                //         } else {
+                //             return shouldShow_importTxsBtn = `Scanner up-to-date`;
+                //         }
+                //     }
+                //
+                //     var messageText;
+                //     var progressLabelLayer_innerHTMLStr = "" // default
+                //     const nBlocks = self.wallet.NBlocksBehind()
+                //     /*                  if (wallet.IsFetchingAnyUpdates()) {
+                //                             messageText = self.context.isMobile == true
+                //                                 ? "FETCHING…"
+                //                                 : "FETCHING UPDATES…"
+                //                         } else */
+                //     if (wallet.IsScannerCatchingUp()) {
+                //         messageText = self.context.isMobile == true
+                //             ? "SCANNING…"
+                //             : "SCANNING BLOCKCHAIN…"
+                //     } else {
+                //         throw "Illegal: !wallet.IsFetchingAnyUpdates() && !wallet.IsScannerCatchingUp()"
+                //     }
+                //     progressLabelLayer_innerHTMLStr = __blocksBehindMsg(nBlocks)
+                //     self.catchingUp_activityIndicatorLayer.Component_setMessageText(messageText)
+                //     self.progressLabelLayer.innerHTML = progressLabelLayer_innerHTMLStr
+                // }
                 const layer = view.layer
                 layer.style.position = "relative"
                 layer.style.left = "0"
@@ -1148,7 +1235,8 @@ class WalletDetailsView extends View {
             function (tx, i) {
                 const received_JSBigInt = tx.total_received ? (typeof tx.total_received == 'string' ? new JSBigInt(tx.total_received) : tx.total_received) : new JSBigInt("0")
                 const sent_JSBigInt = tx.total_sent ? (typeof tx.total_sent == 'string' ? new JSBigInt(tx.total_sent) : tx.total_sent) : new JSBigInt("0")
-                const amountString = monero_amount_format_utils.formatMoney(received_JSBigInt.subtract(sent_JSBigInt))
+                const amountString = tx.total_received
+                //const amountString = monero_amount_format_utils.formatMoney(received_JSBigInt.subtract(sent_JSBigInt))
                 //
                 const payment_id = `${tx.payment_id || ""}`
                 const status = `${tx.isFailed ? "REJECTED" : (tx.isConfirmed !== true || tx.isUnlocked !== true ? "PENDING" : "CONFIRMED")}`

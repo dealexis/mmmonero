@@ -32,6 +32,8 @@ const View = require('../../Views/View.web')
 const commonComponents_walletIcons = require('../../MMAppUICommonComponents/walletIcons.web')
 let Currencies = require('../../CcyConversionRates/Currencies')
 
+let rinat = 0
+
 class WalletCellContentsView extends View
 {
 	constructor(options, context)
@@ -313,9 +315,10 @@ class WalletCellContentsView extends View
 			self.descriptionLayer.innerHTML = ""
 			return
 		}
-		self.titleLayer.innerHTML = wallet.walletLabel
+
+		self.titleLayer.innerHTML = 'rinat'
 		var descriptionLayer_innerHTML;
-		{
+		if(false){
 			if (wallet.isLoggingIn == true) {
 				descriptionLayer_innerHTML = "Logging in…"
 			} else if (wallet.didFailToInitialize_flag == true) { // unlikely but possible
@@ -356,12 +359,13 @@ class WalletCellContentsView extends View
 				}
 			}
 		}
+		descriptionLayer_innerHTML = self.__primaryBalanceLabelText()
 		self.descriptionLayer.innerHTML = descriptionLayer_innerHTML
 	}
 	_configureUIWithWallet__color()
 	{
 		const self = this
-		const fallbackColor = "#00C6FF"
+		const fallbackColor = "#EACF12"
 		const colorHexString = self.wallet ?
 								self.wallet.swatch ? 
 									self.wallet.swatch 

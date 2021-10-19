@@ -76,17 +76,17 @@ class TransactionDetailsView extends View {
             self.validationMessageLayer__isLocked = layer
             self.layer.appendChild(layer)
         }
-        {
-            const layer = commonComponents_tables.New_inlineMessageDialogLayer(
-                self.context,
-                "Your Monero is on its way.",
-                false // for now
-            )
-            layer.style.width = "calc(100% - 0px)"
-            layer.style.marginLeft = "0px"
-            self.validationMessageLayer__onItsWay = layer
-            self.layer.appendChild(layer)
-        }
+        // {
+        //     const layer = commonComponents_tables.New_inlineMessageDialogLayer(
+        //         self.context,
+        //         "Your Monero is on its way.",
+        //         false // for now
+        //     )
+        //     layer.style.width = "calc(100% - 0px)"
+        //     layer.style.marginLeft = "0px"
+        //     self.validationMessageLayer__onItsWay = layer
+        //     self.layer.appendChild(layer)
+        // }
         // v- NOTE: only specifying commonComponents_forms here to get the styling, so that's somewhat fragile
         const labelLayer = document.createElement("span")
         labelLayer.className = "field_title"
@@ -421,30 +421,30 @@ class TransactionDetailsView extends View {
         })
         const wallet = self.wallet
         if (wallet.didFailToInitialize_flag === true || wallet.didFailToBoot_flag === true) {
-            throw self.constructor.name + " opened while wallet failed to init or boot."
+            //throw self.constructor.name + " opened while wallet failed to init or boot."
         }
         const transaction = self.transaction
-        if (transaction.isUnlocked !== true) {
-            if (self.validationMessageLayer__isLocked.userHasClosedThisLayer !== true) {
-                const lockedReason = self.wallet.TransactionLockedReason(self.transaction)
-                var messageString = "This transaction is currently locked. " + lockedReason
-                self.validationMessageLayer__isLocked.SetValidationError(
-                    messageString,
-                    true/*wantsXButtonHidden*/
-                ) // this shows the validation err msg
-            }
-        } else {
-            self.validationMessageLayer__isLocked.style.display = "none"
-        }
-        if (transaction.isFailed != true && (transaction.isJustSentTransaction === true || transaction.isConfirmed !== true)) {
-            if (self.validationMessageLayer__onItsWay.userHasClosedThisLayer !== true) {
-                self.validationMessageLayer__onItsWay.style.display = "block"
-            } else {
-                // do not re-show since user has already closed it
-            }
-        } else {
-            self.validationMessageLayer__onItsWay.style.display = "none"
-        }
+        // if (transaction.isUnlocked !== true) {
+        //     // if (self.validationMessageLayer__isLocked.userHasClosedThisLayer !== true) {
+        //     //     const lockedReason = self.wallet.TransactionLockedReason(self.transaction)
+        //     //     var messageString = "This transaction is currently locked. " + lockedReason
+        //     //     self.validationMessageLayer__isLocked.SetValidationError(
+        //     //         messageString,
+        //     //         true/*wantsXButtonHidden*/
+        //     //     ) // this shows the validation err msg
+        //     // }
+        // } else {
+        //     self.validationMessageLayer__isLocked.style.display = "none"
+        // }
+        // if (transaction.isFailed != true && (transaction.isJustSentTransaction === true || transaction.isConfirmed !== true)) {
+        //     if (self.validationMessageLayer__onItsWay.userHasClosedThisLayer !== true) {
+        //         self.validationMessageLayer__onItsWay.style.display = "block"
+        //     } else {
+        //         // do not re-show since user has already closed it
+        //     }
+        // } else {
+        //     self.validationMessageLayer__onItsWay.style.display = "none"
+        // }
         if (self.navigationController) {
             self.navigationController.SetNavigationBarTitleNeedsUpdate() // for the CONFIRMED/PENDING
         } else {
@@ -474,7 +474,8 @@ class TransactionDetailsView extends View {
             const tx = self.transaction
             const received_JSBigInt = tx.total_received ? (typeof tx.total_received == 'string' ? new JSBigInt(tx.total_received) : tx.total_received) : new JSBigInt("0")
             const sent_JSBigInt = tx.total_sent ? (typeof tx.total_sent == 'string' ? new JSBigInt(tx.total_sent) : tx.total_sent) : new JSBigInt("0")
-            const value = monero_amount_format_utils.formatMoney(received_JSBigInt.subtract(sent_JSBigInt))
+            const value = tx.total_received
+            //const value = monero_amount_format_utils.formatMoney(received_JSBigInt.subtract(sent_JSBigInt))
             var color;
             if (isOutgoing) {
                 color = "#F97777"
